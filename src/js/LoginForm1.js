@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as validationHelper from "../helpers/validation.helper";
-import "./../css/login.css";
+import Register from "./Register";
 
 class LoginForm1 extends React.Component {
   constructor(props) {
@@ -12,7 +12,9 @@ class LoginForm1 extends React.Component {
       formData: formData,
       formValid: false,
       staySignedIn: true,
-      loginSuccess: false
+      loginSuccess: false,
+      registerHidden: true,
+      loginHidden: false
     };
 
     this.onChange = validationHelper.onChange.bind(this);
@@ -20,9 +22,9 @@ class LoginForm1 extends React.Component {
     this.staySignedIn = this.staySignedIn.bind(this);
   }
 
-  componentDidMount() {
-    $(this.refs.toggleInput.getDOMNode()).bootstrapToggle();
-  }
+  // componentDidMount() {
+  //   this.refs.toggleInput.getDOMNode().bootstrapToggle();
+  // }
 
   staySignedIn() {
     this.state.staySignedIn
@@ -30,6 +32,11 @@ class LoginForm1 extends React.Component {
       : this.setState({ staySignedIn: true });
   }
 
+  showPanels(e) {
+    e.preventDefault();
+    this.setState({ registerHidden: false });
+    this.setState({ loginHidden: !this.state.loginHidden });
+  }
   componentWillReceiveProps(nextProps) {
     const formData = this.convertPropsToFormData(nextProps);
     this.setState({ formData: formData });
@@ -97,196 +104,131 @@ class LoginForm1 extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container">
-          <h4 className="pb-2 pt-3"> Login To Your Account</h4>
-          <div className="row" id="parent">
-            <div className="col-md-6 col-12 card d-block border-0 py-2">
-              <a
-                href=""
-                className="btn btn-outline-secondary"
-                data-toggle="collapse"
-                data-target="#cardLogin"
-                data-parent="#parent"
-              >
-                Login
-              </a>
-              <a
-                href=""
-                className="btn btn-outline-secondary"
-                data-toggle="collapse"
-                data-target="#cardRegister"
-                data-parent="#parent"
-              >
-                Register
-              </a>
-              <div className="collapse show py-2" id="cardLogin">
-                <div className="card">
-                  <div className="card-block">
-                    <h2 className="text-xs-center">Login</h2>
-                    <ul className="list-inline text-center">
-                      <li className="list-inline-item">
-                        <a className="btn btn-lg" href="" title="Twitter">
-                          <i className="fa fa-2x fa-twitter" />
-                        </a>&nbsp;
-                      </li>
-                      <li className="list-inline-item">
-                        <a className="btn btn-lg" href="" title="">
-                          <i className="fa fa-2x fa-google-plus" />
-                        </a>&nbsp;
-                      </li>
-                      <li className="list-inline-item">
-                        <a className="btn btn-lg" href="" title="Facebook">
-                          <i className="fa fa-2x fa-facebook" />
-                        </a>&nbsp;
-                      </li>
-                    </ul>
-                    <form role="form">
-                      <div className="form-group row">
-                        <label
-                          for="inputEmailForm"
-                          className="sr-only control-label"
-                        >
-                          Email
-                        </label>
-                        <div className="offset-sm-2 col-sm-8">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="inputEmailForm"
-                            placeholder="email"
-                            required=""
-                          />
+        {/* <h4 className="">Login To Your Account</h4> */}
+        <div className="col-md-4 d-block border-0 py-2">
+          {/* <button
+            onClick={e => {
+              this.showPanels(e);
+            }}
+            className="btn btn-outline-secondary"
+            data-toggle="collapse"
+            data-target="#cardLogin"
+            data-parent="#parent"
+          >
+            Login
+          </button> */}
+
+          {/* <button
+            className="btn btn-outline-secondary"
+            data-toggle="collapse"
+            data-target="#cardRegister"
+            data-parent="#parent"
+          >
+            Register
+          </button> */}
+          {!this.state.loginHidden && (
+            <div className="" id="cardLogin">
+              <div className="card">
+                <div className="card-block">
+                  <div className="card-header">
+                    <h2 className="text-center">Login</h2>
+                  </div>
+                  <ul className="list-inline text-center">
+                    <li className="list-inline-item">
+                      <a className="btn btn-lg" href="" title="Twitter">
+                        <i className="fa fa-2x fa-twitter" />
+                      </a>&nbsp;
+                    </li>
+                    <li className="list-inline-item">
+                      <a className="btn btn-lg" href="" title="">
+                        <i className="fa fa-2x fa-google-plus" />
+                      </a>&nbsp;
+                    </li>
+                    <li className="list-inline-item">
+                      <a className="btn btn-lg" href="" title="Facebook">
+                        <i className="fa fa-2x fa-facebook" />
+                      </a>&nbsp;
+                    </li>
+                  </ul>
+                  <form>
+                    <div className="form-group row">
+                      <label
+                        htmlFor="inputEmailForm"
+                        className="sr-only control-label"
+                      >
+                        Email
+                      </label>
+                      <div className="offset-sm-2 col-sm-8">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="inputEmailForm"
+                          placeholder="email"
+                          required=""
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label
+                        htmlFor="inputPasswordForm"
+                        className="sr-only control-label"
+                      >
+                        Passsword
+                      </label>
+                      <div className="offset-sm-2 col-sm-8">
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="inputPasswordForm"
+                          placeholder="password"
+                          required=""
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <div className="offset-sm-2 col-sm-8">
+                        <div className="checkbox small">
+                          <label>
+                            <input type="checkbox" /> Remember Me
+                          </label>
                         </div>
                       </div>
-                      <div className="form-group row">
-                        <label
-                          for="inputPasswordForm"
-                          className="sr-only control-label"
-                        >
-                          Passsword
-                        </label>
-                        <div className="offset-sm-2 col-sm-8">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="inputPasswordForm"
-                            placeholder="password"
-                            required=""
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row">
-                        <div className="offset-sm-2 col-sm-8">
-                          <div className="checkbox small">
-                            <label>
-                              <input type="checkbox" /> Remember Me
-                            </label>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
+                 
                       <div className="form-group row">
                         <div className="offset-sm-2 col-sm-8 pb-3 pt-2">
                           <button
                             type="submit"
-                            className="btn btn-secondary-outline btn-lg btn-block"
+                            className="btn btn-dark btn-sm btn-block"
                           >
                             Sign-in
                           </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <div className="collapse py-2" id="cardRegister">
-                <div className="card">
-                  <div className="card-block">
-                    <h2 className="text-center">Register</h2>
-                    <ul className="list-inline text-center">
-                      <li className="list-inline-item">
-                        <a className="btn btn-lg" href="" title="Twitter">
-                          <i className="fa fa-2x fa-twitter" />
-                        </a>&nbsp;
-                      </li>
-                      <li className="list-inline-item">
-                        <a className="btn btn-lg" href="" title="">
-                          <i className="fa fa-2x fa-google-plus" />
-                        </a>&nbsp;
-                      </li>
-                      <li className="list-inline-item">
-                        <a className="btn btn-lg" href="" title="Facebook">
-                          <i className="fa fa-2x fa-google-plus" />
-                        </a>&nbsp;
-                      </li>
-                    </ul>
-                    <form role="form">
-                      <div className="form-group row">
-                        <label
-                          for="input2EmailForm"
-                          className="sr-only control-label"
-                        >
-                          email
-                        </label>
-                        <div className="offset-sm-2 col-sm-8">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="input2EmailForm"
-                            placeholder="email"
-                            required=""
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row">
-                        <label
-                          for="input2PasswordForm"
-                          className="sr-only control-label"
-                        >
-                          password
-                        </label>
-                        <div className="offset-sm-2 col-sm-8">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="input2Password2Form"
-                            placeholder="password"
-                            required=""
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row">
-                        <label
-                          for="input2Password2Form"
-                          className="sr-only control-label"
-                        >
-                          verify
-                        </label>
-                        <div className="offfset-sm-2 col-sm-8">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="input2Password2Form"
-                            placeholder="verify password"
-                            required=""
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group row">
-                        <div className="offset-sm-2 col-sm-8 pb-3 pt-2">
                           <button
+                            onClick={e => this.showPanels(e)}
                             type="submit"
-                            className="btn btn-secondary-outline btn-lg btn-block"
+                            className="btn btn-secondary btn-sm btn-block"
+                            data-toggle="collapse"
+                            data-target="#cardRegister"
+                            data-parent="#parent"
                           >
                             Register
                           </button>
+                          <div>
+                            <small>
+                              <a href="">
+                                <p className="text-center">Forgot Password?</p>
+                              </a>
+                            </small>
+                          </div>
                         </div>
                       </div>
-                    </form>
-                  </div>
+              
+                  </form>
                 </div>
               </div>
             </div>
-          </div>
+          )}
+          {!this.state.isHidden && <Register />}
         </div>
       </React.Fragment>
     );

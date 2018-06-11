@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./../css/videl.css";
+import "./../css/login.css";
 
-import video from "./files/home.mp4";
+import video from "./files/beach.mp4";
 import Login from "./LoginForm1";
 
 class Home extends Component {
@@ -13,19 +14,16 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* <video autoPlay muted loop id="myVideo">
+        <video autoPlay muted loop id="myVideo">
           <source src={video} type="video/mp4" />
-        </video> */}
-
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-6 col-lg-offset-3">
+        </video>
+        <div className="container" id="panel">
+          <div className="row justify-content-center">
+           
               <Login />
-            </div>
+     
           </div>
         </div>
-
-        
       </React.Fragment>
     );
   }

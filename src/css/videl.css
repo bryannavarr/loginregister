@@ -1,6 +1,6 @@
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 body {
   margin: 0;
@@ -9,9 +9,9 @@ body {
 }
 
 body {
-  background-color: #ce3635;
-  /* color: #fff; */
-  padding-top: 10em;
+  background-color: black;
+  color: #fff;
+  padding-top: 8em;
 }
 
 /* * {
@@ -20,14 +20,23 @@ body {
 } */
 
 #myVideo {
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
 }
 
-.content {
+/* #panel{
+  opacity: 0.8
+} */
+
+.card {
+  background-color: #1f2833;
+  opacity: 0.8;
+}
+
+/* .content {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -59,4 +68,4 @@ body {
   text-transform: uppercase;
   margin-top: 50px;
   cursor: pointer;
-}
+} */
