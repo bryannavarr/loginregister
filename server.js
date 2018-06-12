@@ -6,7 +6,7 @@ const routes = require("./app/routes");
 const dotenv = require("dotenv");
 
 dotenv.config();
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(
@@ -16,7 +16,7 @@ app.use(
 );
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Acess-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Methods", "GET, PUT , POST, DELETE");
   res.header("withCredentials");

@@ -1,4 +1,4 @@
-const cryptjo = require("crypto");
+const crypto = require("crypto");
 
 module.exports = {
   hashUser: hashUser,
