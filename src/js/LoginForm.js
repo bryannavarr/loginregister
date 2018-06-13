@@ -68,27 +68,27 @@ class LoginForm extends React.Component {
     return formData;
   }
 
-  // onSignIn(event) {
-  //   if (!this.state.formValid) {
-  //     const formData = JSON.parse(JSON.stringify(this.state.formData));
-  //     for (let fieldIdentifier in formData) {
-  //       formData[fieldIdentifier].touched = false;
-  //     }
-  //     this.setState({ formData: formData });
-  //   }
-  //   let item = {
-  //     email: this.state.formData.email.value,
-  //     password: this.state.formData.password.value
-  //   };
-  //   usersService
-  //     .login(item)
-  //     .then(() => {
-  //       this.setState({ loginSuccess: true });
-  //     })
-  //     .catch(error => {
-  //       console.log("There was error");
-  //     });
-  // }
+  onSignIn(event) {
+    if (!this.state.formValid) {
+      const formData = JSON.parse(JSON.stringify(this.state.formData));
+      for (let fieldIdentifier in formData) {
+        formData[fieldIdentifier].touched = false;
+      }
+      this.setState({ formData: formData });
+    }
+    let item = {
+      email: this.state.formData.email.value,
+      password: this.state.formData.password.value
+    };
+    usersService
+      .login(item)
+      .then(() => {
+        this.setState({ loginSuccess: true });
+      })
+      .catch(error => {
+        console.log("There was error");
+      });
+  }
 
   render() {
     return (

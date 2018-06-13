@@ -17,6 +17,14 @@ module.exports = {
   resetPassword: resetPassword
 };
 
+function register(model) {
+  return conn
+    .db()
+    .collection("users")
+    .insert(model)
+    .then(result => result.insertedIds[0].toString());
+}
+
 function readAll() {
   return conn
     .db()
@@ -104,6 +112,17 @@ function _delete(id) {
     .deleteOne({ _id: ObjectId(id) })
     .then(result => {
       Promise.resolve();
+    });
+}
+
+function readById(id) {
+  return conn
+    .db()
+    .collection("users")
+    .findOne({ _id: ObjectId(id) })
+    .then(user => {
+      user._id = user._id.toString();
+      return user;
     });
 }
 

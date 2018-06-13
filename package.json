@@ -1,5 +1,5 @@
 {
-  "name": "homepage",
+  "name": "edwrd",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "firebase": "^5.0.4",
     "joi": "^11.1.1",
     "joi-objectid": "^2.0.0",
+    "jsonwebtoken": "^8.2.0",
     "mongo": "^0.1.0",
     "mongo-db": "^1.0.2",
     "react": "^16.4.0",

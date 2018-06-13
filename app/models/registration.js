@@ -2,15 +2,14 @@ const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 
 const schema = {
+  _id: Joi.objectId(),
   email: Joi.string()
     .email()
     .required(),
   password: Joi.string().required(),
-  _id: Joi.objectId(),
-  userId: Joi.objectId(),
   createDate: Joi.date()
     .iso()
-    .default(() => new Date(), "time of creation"),
+    .defatul(() => new Date(), "time of creation"),
   updateDate: Joi.date()
     .iso()
     .default(() => new Date(), "time of update")

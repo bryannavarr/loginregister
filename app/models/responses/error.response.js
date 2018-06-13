@@ -1,4 +1,4 @@
-const BaseRespose = require ('./base.response')
+const BaseResponse = require ('./base.response')
 
 class ErrorResponse extends BaseResponse {
     constructor (err){

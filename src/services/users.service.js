@@ -1,4 +1,3 @@
-import axiosIntance from "../config/axios.config";
 import axiosInstance from "../config/axios.config";
 
 const headers = {};
@@ -69,9 +68,36 @@ export function del(id) {
     .catch(responseErrorHandler);
 }
 
-export function resetPassword(usersData){
-    const config={
-        method: "PUT",
-        data:usersData
-    }
+export function login(usersData) {
+  const config = {
+    method: "POST",
+    data: usersData,
+    withCredentials: true
+  };
+  return axiosInstance(baseUrl + "/login", config)
+    .then(responseSuccessHandler)
+    .catch(responseErrorHandler);
 }
+
+export function resetPassword(usersData) {
+  const config = {
+    method: "PUT",
+    data: usersData
+  };
+  return axiosInstance(baseUrl + "/reset-password", config)
+    .then(data => {
+      return responseSuccessHandler(data);
+    })
+    .catch(data => {
+      return responseErrorHandler(data);
+    });
+}
+
+const responseSuccessHandler = response => {
+  return response.data;
+};
+
+const responseErrorHandler = error => {
+  console.log(error);
+  return Promise.reject(error);
+};
