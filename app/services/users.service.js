@@ -3,6 +3,8 @@ const mongodb = require("../mongodb");
 const conn = mongodb.connection;
 const ObjectId = mongodb.ObjectId;
 const validateDoc = require("../helpers/validate");
+const hasher = require("../helpers/hasher");
+
 
 module.exports = {
   readAll: readAll,
@@ -23,6 +25,7 @@ function register(model) {
     .collection("users")
     .insert(model)
     .then(result => result.insertedIds[0].toString());
+
 }
 
 function readAll() {
@@ -74,7 +77,9 @@ function login(model) {
       if (!result) {
         return null;
       } else {
-        let hashedPw = hasher.hasPassword(result.salt, model.passsword);
+        // debugge
+        let hashedPw = hasher.hashPassword(result.salt, model.password);
+       
         if (hashedPw === result.password) {
           return result;
         } else {

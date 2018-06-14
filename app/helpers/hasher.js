@@ -18,6 +18,6 @@ function generateSalt() {
 
 function hashPassword(salt, password) {
   return crypto
-    .pbkdf2Sync(password, newBuffer(salt), 100000, 32, "sha256")
+    .pbkdf2Sync(password, new Buffer(salt), 100000, 32, "sha256")
     .toString("hex");
 }

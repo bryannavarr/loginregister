@@ -79,6 +79,18 @@ export function login(usersData) {
     .catch(responseErrorHandler);
 }
 
+export function register(usersData) {
+  const config = {
+    method: "POST",
+    headers,
+    data: usersData
+  };
+  return axiosInstance(baseUrl + `/register`, config)
+
+    .then(responseSuccessHandler)
+    .catch(responseErrorHandler);
+}
+
 export function resetPassword(usersData) {
   const config = {
     method: "PUT",

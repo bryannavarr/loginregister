@@ -1,6 +1,6 @@
 const dotenv = require("dotenv");
 const responses = require("../models/responses");
-const usersServer = require("../services/users.service");
+const usersService = require("../services/users.service");
 const apiPrefix = "/api/users";
 const authenticate = require("../filters/authenticate");
 const crypto = require("crypto");

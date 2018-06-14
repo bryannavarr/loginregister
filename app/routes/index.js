@@ -1,8 +1,4 @@
-
-
-
 const router = require("express").Router();
-
 const clientRoutes = require("./client.routes");
 const usersRoutes = require("./users.routes");
 

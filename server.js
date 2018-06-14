@@ -2,11 +2,11 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongo = require("./app/mongodb");
-const routes = require("./app/routes");
+const router = require("./app/routes");
 const dotenv = require("dotenv");
 
 dotenv.config();
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(
@@ -16,20 +16,21 @@ app.use(
 );
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3001");
-  res.header("Acess-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET, PUT , POST, DELETE");
-  res.header("withCredentials");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.header("withCredentials",true);
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Acccept, Cookie, x-access-token"
+    "Origin, X-Requested-With, Content-Type, Accept, Cookie, x-access-token"
   );
   next();
 });
 
-app.use(routes);
+app.use(router);
 
-app.listen(3050);
+app.listen(8080);
+console.log("hello")
 
 mongo
   .connect(process.env.MONGODB_URL)

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import * as validationHelper from "../helpers/validation.helper";
-import "./../css/login.css";
+import Register from "./Register";
+import * as usersService from "../services/users.service";
 
-class LoginForm extends React.Component {
+class LoginForm1 extends React.Component {
   constructor(props) {
     super(props);
 
@@ -12,11 +13,13 @@ class LoginForm extends React.Component {
       formData: formData,
       formValid: false,
       staySignedIn: true,
-      loginSuccess: false
+      loginSuccess: false,
+      registerHidden: true,
+      loginHidden: false
     };
 
     this.onChange = validationHelper.onChange.bind(this);
-    // this.onSignIn = this.onSignIn.bind(this);
+    this.onSignIn = this.onSignIn.bind(this);
     this.staySignedIn = this.staySignedIn.bind(this);
   }
 
@@ -26,6 +29,11 @@ class LoginForm extends React.Component {
       : this.setState({ staySignedIn: true });
   }
 
+  showPanels(e) {
+    e.preventDefault();
+    this.setState({ registerHidden: false });
+    this.setState({ loginHidden: !this.state.loginHidden });
+  }
   componentWillReceiveProps(nextProps) {
     const formData = this.convertPropsToFormData(nextProps);
     this.setState({ formData: formData });
@@ -93,139 +101,118 @@ class LoginForm extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="well" id="login">
-          <form
-            action="index.html#ajax/dashboard.html"
-            id="login-form"
-            className="smart-form client-form"
-          >
-            <header>Sign In</header>
-
-            <fieldset>
-              <section>
-                <div
-                  className={
-                    !this.state.formData.email.valid &&
-                    this.state.formData.email.touched
-                      ? "form-group has-error"
-                      : "form-group"
-                  }
-                >
-                  <label htmlFor="email">E-mail</label>
-                  <div className="input">
-                    {" "}
-                    <i className="icon-append fa fa-user" />
-                    <input
-                      type="text"
-                      name="email"
-                      id="email"
-                      className="form-control"
-                      value={this.state.formData.email.value}
-                      onChange={this.onChange}
-                      placeholder="Email"
-                    />
-                    <b className="tooltip tooltip-top-right">
-                      <i className="fa fa-user txt-color-teal" /> Please enter
-                      email address/username
-                    </b>{" "}
+        <div className="col-md-4 d-block border-0 py-2">
+          {!this.state.loginHidden && (
+            <div className="" id="cardLogin">
+              <div className="card">
+                <div className="card-block">
+                  <div className="card-header">
+                    <h2 className="text-center">Login</h2>
                   </div>
-                  {!this.state.formData.email.valid &&
-                  this.state.formData.email.touched ? (
-                    <p className="text-danger has-error">
-                      An email is required
-                    </p>
-                  ) : null}
+                  <ul className="list-inline text-center">
+                    <li className="list-inline-item">
+                      <a className="btn btn-lg" href="" title="Twitter">
+                        <i className="fa fa-2x fa-twitter" />
+                      </a>&nbsp;
+                    </li>
+                    <li className="list-inline-item">
+                      <a className="btn btn-lg" href="" title="">
+                        <i className="fa fa-2x fa-google-plus" />
+                      </a>&nbsp;
+                    </li>
+                    <li className="list-inline-item">
+                      <a className="btn btn-lg" href="" title="Facebook">
+                        <i className="fa fa-2x fa-facebook" />
+                      </a>&nbsp;
+                    </li>
+                  </ul>
+                  <form>
+                    <div className="form-group row">
+                      <label
+                        htmlFor="inputEmailForm"
+                        className="sr-only control-label"
+                      >
+                        Email
+                      </label>
+                      <div className="offset-sm-2 col-sm-8">
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="email"
+                          id="inputEmailForm"
+                          placeholder="email"
+                          value={this.state.formData.email.value}
+                          onChange={this.onChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <label
+                        htmlFor="inputPasswordForm"
+                        className="sr-only control-label"
+                      >
+                        Passsword
+                      </label>
+                      <div className="offset-sm-2 col-sm-8">
+                        <input
+                          type="password"
+                          className="form-control"
+                          id="inputPasswordForm"
+                          placeholder="password"
+                          name="password"
+                          value={this.state.formData.password.value}
+                          onChange={this.onChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group row">
+                      <div className="offset-sm-2 col-sm-8">
+                        <div className="checkbox small">
+                          <label>
+                            <input type="checkbox" /> Remember Me
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="form-group row">
+                      <div className="offset-sm-2 col-sm-8 pb-3 pt-2">
+                        <button
+                          type="button"
+                          className="btn btn-dark btn-sm btn-block"
+                          onClick={this.onSignIn}
+                        >
+                          Sign-in
+                        </button>
+                        <button
+                          onClick={e => this.showPanels(e)}
+                          type="button"
+                          className="btn btn-secondary btn-sm btn-block"
+                          data-toggle="collapse"
+                          data-target="#cardRegister"
+                          data-parent="#parent"
+                        >
+                          Register
+                        </button>
+                        <div>
+                          <small>
+                            <a href="">
+                              <p className="text-center">Forgot Password?</p>
+                            </a>
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-              </section>
-
-              <section>
-                <div
-                  className={
-                    !this.state.formData.password.valid &&
-                    this.state.formData.password.touched
-                      ? "form-group has-error"
-                      : "form-group"
-                  }
-                >
-                  <label htmlFor="label">Password</label>
-                  <div className="input">
-                    {" "}
-                    <i className="icon-append fa fa-lock" />
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      className="form-control"
-                      value={this.state.formData.password.value}
-                      onChange={this.onChange}
-                      placeholder="Password"
-                    />
-                    <b className="tooltip tooltip-top-right">
-                      <i className="fa fa-lock txt-color-teal" /> Enter your
-                      password
-                    </b>{" "}
-                  </div>
-                  <div className="note">
-                    <a href="forgotpassword.html">Forgot password?</a>
-                  </div>
-                  {!this.state.formData.password.valid &&
-                  this.state.formData.password.touched ? (
-                    <p className="text-danger has-error">
-                      A password is required
-                    </p>
-                  ) : null}
-                </div>
-              </section>
-
-              <section>
-                <label className="checkbox">
-                  <input
-                    type="checkbox"
-                    name="remember"
-                    onChange={this.staySignedIn}
-                    checked={this.state.staySignedIn}
-                  />
-                  <i />Stay signed in
-                </label>
-              </section>
-            </fieldset>
-
-            <footer>
-              <button
-                type="button"
-                onClick={this.onSignIn}
-                className="btn btn-primary"
-                disabled={!this.state.formValid}
-              >
-                Sign in
-              </button>
-            </footer>
-          </form>
+              </div>
+            </div>
+          )}
+          {!this.state.registerHidden && <Register />}
         </div>
-
-        <h5 className="text-center"> - Or sign in using -</h5>
-
-        <ul className="list-inline text-center">
-          <li>
-            <a
-              href="https://localhost:8080/api/users/auth/facebook"
-              className="btn btn-primary btn-circle"
-            >
-              <i className="fa fa-facebook" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://localhost:8080/api/users/auth/twitter"
-              className="btn btn-info btn-circle"
-            >
-              <i className="fa fa-twitter" />
-            </a>
-          </li>
-        </ul>
       </React.Fragment>
     );
   }
 }
 
-export default LoginForm;
+export default LoginForm1;

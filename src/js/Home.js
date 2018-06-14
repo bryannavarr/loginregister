@@ -3,7 +3,7 @@ import "./../css/videl.css";
 import "./../css/login.css";
 
 import video from "./files/beach.mp4";
-import Login from "./LoginForm1";
+import Login from "./LoginForm";
 
 class Home extends Component {
   constructor(props) {

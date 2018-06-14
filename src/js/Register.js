@@ -12,4 +12,4 @@ class Register extends React.Component {
   }
 }
 
-export default RegisterForm;
+export default Register;
