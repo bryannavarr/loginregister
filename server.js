@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
 
 app.use(router);
 
-app.listen(8080);
+app.listen(3050);
 console.log("hello")
 
 mongo
