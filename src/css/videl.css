@@ -3,15 +3,15 @@
 } */
 
 body {
-  margin: 0;
-  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
-  font-size: 17px;
+	margin: 0;
+	font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+	font-size: 17px;
 }
 
 body {
-  background-color: black;
-  color: #fff;
-  padding-top: 7em;
+	background-color: black;
+	color: #fff;
+	padding-top: 7em;
 }
 
 /* * {
@@ -20,11 +20,20 @@ body {
 } */
 
 #myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+
+#logo {
+	height: 12vh;
+	width: 15vw;
+	position: fixed;
+	z-index: 100;
+	top: 2%;
+	left: 2%;
 }
 
 /* #panel{
@@ -32,8 +41,8 @@ body {
 } */
 
 .card {
-  background-color: #1f2833;
-  opacity: 0.8;
+	background-color: #1f2833;
+	opacity: 0.8;
 }
 
 /* .content {
