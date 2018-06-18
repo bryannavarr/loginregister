@@ -1,17 +1,17 @@
-/* * {
+* {
   box-sizing: border-box;
-} */
-
-body {
-	margin: 0;
-	font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
-	font-size: 17px;
 }
 
 body {
-	background-color: black;
-	color: #fff;
-	padding-top: 7em;
+  margin: 0;
+  font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+  font-size: 17px;
+}
+
+body {
+  background-color: black;
+  color: #fff;
+  padding-top: 100px;
 }
 
 /* * {
@@ -20,39 +20,43 @@ body {
 } */
 
 #myVideo {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	min-width: 100%;
-	min-height: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 #logo {
-	height: 12vh;
-	width: 15vw;
-	position: fixed;
-	z-index: 100;
-	top: 2%;
-	left: 2%;
+  /* margin-left: -8.1vw;
+  margin-top: -1vh; */
+  position: absolute;
+  height: 30%;
+  width: 30%;
+  padding-left: 0;
+  z-index: 100;
+  top: 0;
+  left: 0;
 }
-
-/* #panel{
-  opacity: 0.8
-} */
 
 .card {
-	background-color: #1f2833;
-	opacity: 0.8;
+  background-color: #1f2833;
+  opacity: 0.9;
+  /* margin-right: -5vw;
+  margin-left: 8vw;*/
+  margin-top: 1vh; 
 }
 
-/* .content {
+.content {
   position: fixed;
   bottom: 0;
   width: 100%;
   padding: 20px;
   font-size: 2em;
+  margin-left: 7.9vw;
+  margin-bottom: 28vh;
 }
-
+/* 
 #myBtn {
   width: 200px;
   font-size: 18px;
@@ -61,9 +65,9 @@ body {
   background: #000;
   color: #fff;
   cursor: pointer;
-}
+} */
 
-#myBtn:hover {
+/* #myBtn:hover {
   background: #ddd;
   color: black;
 }
@@ -77,4 +81,4 @@ body {
   text-transform: uppercase;
   margin-top: 50px;
   cursor: pointer;
-} */
+}  */

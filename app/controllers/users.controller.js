@@ -10,6 +10,8 @@ const jwt = require("jsonwebtoken");
 const userSchema = require("../models/users");
 const validateDoc = require("../helpers/validate");
 const hasher = require("../helpers/hasher");
+const nodemailer = require("nodemailer");
+const passport = require("passport");
 
 module.exports = {
   readAll: readAll,
@@ -21,7 +23,8 @@ module.exports = {
   delete: _delete,
   register: register,
   logout: logout,
-  resetPassword: resetPassword
+  resetPassword: resetPassword,
+  socialMediaLoginCallback: socialMediaLoginCallback
 };
 
 function readAllExt(req, rest) {
@@ -67,6 +70,15 @@ function register(req, res) {
         .then(id => {
           const responseModel = new responses.ItemResponse();
           responseModel.item = id;
+
+          nodemailer.createTestAccount((err, account) => {
+            if (err) {
+              console.error(
+                "Failed to create a testing account." + err.message
+              );
+              return process.exit(1);
+            }
+          });
           res
             .status(201)
             .location(`${apiPrefix}/register/${id}`)
@@ -139,6 +151,21 @@ function login(req, res) {
       console.log(err);
       res.status(500).send(new responses.ErrorResponse(err));
     });
+}
+
+function socialMediaLoginCallback(req, res, next) {
+  let socialMediaName = req.path.split("/");
+  passport.authenticate(`${socialMediaName[2]}`, function(err, userId, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!userId) {
+      res.redirect("http://localhost:3000/auth/login");
+    } else {
+      let user = { _id: userId };
+      authenticate.setAuthCookie(req, res, user);
+    }
+  })(req, res, next);
 }
 
 function update(req, res) {

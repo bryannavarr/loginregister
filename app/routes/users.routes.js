@@ -5,11 +5,19 @@ const User = require("../models/users");
 const UsersLogin = require("../models/usersLogin");
 const Password = require("../models/resetPassword");
 const idFilter = require("../filters/id.filter");
+const passport = require("passport");
 
 module.exports = router;
 
 router.get("/", usersController.readAll);
 router.get("/:id([0-9a-fA-F]{24})", usersController.readById);
+router.get(
+  "/auth/facebook",
+  passport.authenticate("facebook", { scope: ["email"] })
+);
+router.get("/auth/facebook/callback", usersController.socialMediaLoginCallback);
+router.get("/auth/twitter", passport.authenticate("twitter"));
+router.get("/auth/twitter/callback", usersController.socialMediaLoginCallback);
 router.put(
   "/:id([0-9a-fA-F]{24})",
   idFilter.bodyIdRequired,
@@ -34,4 +42,3 @@ router.post(
 router.post("/login", validateBody(UsersLogin), usersController.login);
 router.post("/logout", usersController.logout);
 router.delete("/:id([0-9a-fA-F]{24})", usersController.delete);
-

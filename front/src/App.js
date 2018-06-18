@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import Home from "./js/Home";
+import Home from "./components/Home";
 import createHistory from "history/createBrowserHistory";
 import { Router } from "react-router-dom";
 

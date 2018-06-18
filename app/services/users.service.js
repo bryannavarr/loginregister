@@ -4,12 +4,13 @@ const conn = mongodb.connection;
 const ObjectId = mongodb.ObjectId;
 const validateDoc = require("../helpers/validate");
 const hasher = require("../helpers/hasher");
-
+const crypto = require("crypto");
 
 module.exports = {
   readAll: readAll,
   readAllExt: readAllExt,
   readById: readById,
+  readBySocialMedia: readBySocialMedia,
   create: create,
   login: login,
   update: update,
@@ -25,7 +26,6 @@ function register(model) {
     .collection("users")
     .insert(model)
     .then(result => result.insertedIds[0].toString());
-
 }
 
 function readAll() {
@@ -58,6 +58,22 @@ function readAllExt() {
     });
 }
 
+function readBySocialMedia(userProfile) {
+  let socialMedia = `${userProfile.provider}._id`;
+  return conn
+    .db()
+    .collection("users")
+    .findOne({ [socialMedia]: userProfile.id })
+    .then(user => {
+      if (user) {
+        user._id = user._id.toString();
+        return user._id;
+      } else {
+        return null;
+      }
+    });
+}
+
 function create(model) {
   return conn
     .db()
@@ -79,7 +95,7 @@ function login(model) {
       } else {
         // debugge
         let hashedPw = hasher.hashPassword(result.salt, model.password);
-       
+
         if (hashedPw === result.password) {
           return result;
         } else {
