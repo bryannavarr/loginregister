@@ -56,6 +56,13 @@ function readById(req, res) {
 }
 
 function register(req, res) {
+  req.model.emailKeyExpireDate = new Date(
+    new Date().setDate(new Date().getDate() + 1)
+  );
+
+  let emailConfirmationKey = crypto.randomBytes(16).toString("hex");
+  req.model.email.emailConfirmationKey = emailConfirmationKey;
+
   usersService.readByEmail(req.model.email).then(data => {
     if (data) {
       res.status(400).send("Email already exists");
@@ -70,15 +77,36 @@ function register(req, res) {
         .then(id => {
           const responseModel = new responses.ItemResponse();
           responseModel.item = id;
-
-          nodemailer.createTestAccount((err, account) => {
-            if (err) {
-              console.error(
-                "Failed to create a testing account." + err.message
-              );
-              return process.exit(1);
+          const transporter = nodemailer.createTransport({
+            host: "smtp.ethereal.email",
+            port: 587,
+            auth: {
+              user: process.env.ETHEREAL_EMAIL,
+              pass: process.env.ETHEREAL_PASSWORD
             }
           });
+          let mailOptions = {
+            from: "info@edwrd.io",
+            to: req.model.email,
+            subject: "Please verify your email",
+            text:
+              "Please copy and paste this address to your browser http://localhost:3000/auth/accountconfirmation/" +
+              emailConfirmationKey +
+              "This link will expire in 24 hours",
+            html:
+              '<a href = "http://localhost:3000/auth/accountconfirmation/' +
+              '"' +
+              ">Click here to verify your email</a><br><p>Verification link will expire in 24 hours.</p>"
+          };
+          transporter.sendMail(message, (err, info) => {
+            if (err) {
+              console.log("Error occured." + err.message);
+              return process.exit(1);
+            }
+            console.log("Message sent: %s", info.messageId);
+            console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+          });
+
           res
             .status(201)
             .location(`${apiPrefix}/register/${id}`)

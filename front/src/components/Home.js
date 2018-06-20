@@ -14,7 +14,7 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <img src={logo} id="logo" alt="edwrd logo"/>
+        <img src={logo} id="logo" alt="edwrd logo" />
 
         <video autoPlay muted loop id="myVideo">
           <source src={video} type="video/mp4" />
@@ -38,7 +38,9 @@ class Home extends Component {
         </div>
         <div className="container" id="panel">
           <div className="row justify-content-end">
-            <Login />
+            <div className="col-md-4 d-block border-0 py-2">
+              <Login />
+            </div>
           </div>
         </div>
       </React.Fragment>

@@ -138,38 +138,20 @@ class RegisterForm extends React.Component {
             <div className="card-header">
               <h2 className="text-center">Register</h2>
             </div>
-            <ul className="list-inline text-center">
-              <li className="list-inline-item">
-                <a className="btn btn-lg" href="" title="Twitter">
-                  <i className="fa fa-2x fa-twitter" />
-                </a>&nbsp;
-              </li>
-              <li className="list-inline-item">
-                <a className="btn btn-lg" href="" title="">
-                  <i className="fa fa-2x fa-google-plus" />
-                </a>&nbsp;
-              </li>
-              <li className="list-inline-item">
-                <a className="btn btn-lg" href="" title="Facebook">
-                  <i className="fa fa-2x fa-facebook" />
-                </a>&nbsp;
-              </li>
-            </ul>
+
             <form>
               <div className="form-group row">
                 <label
                   htmlFor="input2EmailForm"
                   className="sr-only control-label"
-                >
-                  name
-                </label>
+                />
                 <div className="offset-sm-2 col-sm-8">
                   <input
                     type="text"
                     name="name"
                     value={this.state.formData.name.value}
                     className="form-control"
-                    placeholder="name"
+                    placeholder="Name"
                     onChange={this.onChange}
                   />
                 </div>
@@ -186,7 +168,7 @@ class RegisterForm extends React.Component {
                     type="email"
                     className="form-control"
                     name="email"
-                    placeholder="email"
+                    placeholder="Email"
                     value={this.state.formData.email.value}
                     onChange={this.onChange}
                   />
@@ -199,7 +181,7 @@ class RegisterForm extends React.Component {
                     type="password"
                     className="form-control"
                     name="password"
-                    placeholder="password"
+                    placeholder="Password"
                     value={this.state.formData.password.value}
                     onChange={this.onChange}
                   />
@@ -212,7 +194,7 @@ class RegisterForm extends React.Component {
                     type="password"
                     className="form-control"
                     name="passwordConfirm"
-                    placeholder="confirm password"
+                    placeholder="Confirm Password"
                     value={this.state.formData.passwordConfirm.value}
                     onChange={this.confirmPasswordsMatch}
                   />
@@ -227,6 +209,20 @@ class RegisterForm extends React.Component {
                   >
                     Register
                   </button>
+                  <div style={{ paddingTop: "20px" }}>
+                    <small>
+                      <a
+                        href=""
+                        onClick={this.showLogin}
+                        className=""
+                        data-toggle="collapse"
+                        data-target="#cardRegister"
+                        data-parent="#parent"
+                      >
+                        <p className="text-center">Back to Login</p>
+                      </a>
+                    </small>
+                  </div>
                 </div>
               </div>
             </form>

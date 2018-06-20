@@ -23,6 +23,16 @@ router.put(
   idFilter.bodyIdRequired,
   usersController.update
 );
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["https://www.googleapis.com/auth/plus.login"]
+  })
+);
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", usersController.socialMediaLoginCallback)
+);
 router.put(
   "/reset-password",
   validateBody(Password.ResetSchema),
