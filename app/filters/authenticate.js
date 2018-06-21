@@ -3,26 +3,26 @@ const hasher = require("../helpers/hasher");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
-  // authenticate:authenticate,
+  authenticate:authenticate,
   setAuthCookie: setAuthCookie
 };
 
-// function authenticate (req, res, next){
-//     if (req.cookies.auth && req.cookies.hashedUser){
-//         const user = hasher.hashUser(req.cookies.auth)
-//         if (user === req.cookies.hashedUser){
-//             const verifiedUser = JSON.parse (req.cookies.auth)
-//             req.auth ={
-//                 userId : verifiedUser.id,
-//                 role: verifiedUser.role,
-//                 token:false
-//             }
-//             next();
-//         } else {
-//             res.status(401).json("General Error")
-//         }
-//     }
-// }
+function authenticate (req, res, next){
+    if (req.cookies.auth && req.cookies.hashedUser){
+        const user = hasher.hashUser(req.cookies.auth)
+        if (user === req.cookies.hashedUser){
+            const verifiedUser = JSON.parse (req.cookies.auth)
+            req.auth ={
+                userId : verifiedUser.id,
+                role: verifiedUser.role,
+                token:false
+            }
+            next();
+        } else {
+            res.status(401).json("General Error")
+        }
+    }
+}
 
 function setAuthCookie(req, res, user, responseModelItem) {
   const userInfo = {

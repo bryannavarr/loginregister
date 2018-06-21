@@ -2,6 +2,7 @@ import React from "react";
 import * as validationHelper from "../helpers/validation.helper";
 import * as usersService from "../services/users.service";
 import { Redirect } from "react-router-dom";
+import Login from "./Login";
 
 class RegisterForm extends React.Component {
   constructor(props) {
@@ -11,11 +12,22 @@ class RegisterForm extends React.Component {
 
     this.state = {
       formData: formData,
-      formValid: false
+      formValid: false,
+      loginHidden: true,
+      registerHidden: false
     };
     this.onChange = validationHelper.onChange.bind(this);
     this.registerUser = this.registerUser.bind(this);
     this.confirmPasswordsMatch = this.confirmPasswordsMatch.bind(this);
+    this.showLogin = this.showLogin.bind(this);
+
+  }
+
+  showLogin() {
+    this.setState({
+      registerHidden: true
+    });
+    this.setState({ loginHidden: !this.state.loginHidden });
   }
 
   initializeValidation() {
@@ -132,103 +144,108 @@ class RegisterForm extends React.Component {
 
   render() {
     return (
-      <div className="collapse py-2" id="cardRegister">
-        <div className="card">
-          <div className="card-block">
-            <div className="card-header">
-              <h2 className="text-center">Register</h2>
-            </div>
+      <React.Fragment>
+        {!this.state.loginHidden && <Login />}
+        {!this.state.registerHidden && (
+          <div className="collapse py-2" id="cardRegister">
+            <div className="card">
+              <div className="card-block">
+                <div className="card-header">
+                  <h2 className="text-center">Register</h2>
+                </div>
 
-            <form>
-              <div className="form-group row">
-                <label
-                  htmlFor="input2EmailForm"
-                  className="sr-only control-label"
-                />
-                <div className="offset-sm-2 col-sm-8">
-                  <input
-                    type="text"
-                    name="name"
-                    value={this.state.formData.name.value}
-                    className="form-control"
-                    placeholder="Name"
-                    onChange={this.onChange}
-                  />
-                </div>
-              </div>
-              <div className="form-group row">
-                <label
-                  htmlFor="input2EmailForm"
-                  className="sr-only control-label"
-                >
-                  email
-                </label>
-                <div className="offset-sm-2 col-sm-8">
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="email"
-                    placeholder="Email"
-                    value={this.state.formData.email.value}
-                    onChange={this.onChange}
-                  />
-                </div>
-              </div>
-              <div className="form-group row">
-                <label className="sr-only control-label" />
-                <div className="offset-sm-2 col-sm-8">
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    placeholder="Password"
-                    value={this.state.formData.password.value}
-                    onChange={this.onChange}
-                  />
-                </div>
-              </div>
-              <div className="form-group row">
-                <label className="sr-only control-label" />
-                <div className="offset-sm-2 col-sm-8">
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="passwordConfirm"
-                    placeholder="Confirm Password"
-                    value={this.state.formData.passwordConfirm.value}
-                    onChange={this.confirmPasswordsMatch}
-                  />
-                </div>
-              </div>
-              <div className="form-group row">
-                <div className="offset-sm-2 col-sm-8 pb-3 pt-2">
-                  <button
-                    type="button"
-                    className="btn btn-secondary btn-md btn-block"
-                    onClick={this.registerUser}
-                  >
-                    Register
-                  </button>
-                  <div style={{ paddingTop: "20px" }}>
-                    <small>
-                      <a
-                        href=""
-                        onClick={this.showLogin}
-                        className=""
-                        data-toggle="collapse"
-                        data-target="#cardRegister"
-                        data-parent="#parent"
-                      >
-                        <p className="text-center">Back to Login</p>
-                      </a>
-                    </small>
+                <form>
+                  <div className="form-group row">
+                    <label
+                      htmlFor="input2EmailForm"
+                      className="sr-only control-label"
+                    />
+                    <div className="offset-sm-2 col-sm-8">
+                      <input
+                        type="text"
+                        name="name"
+                        value={this.state.formData.name.value}
+                        className="form-control"
+                        placeholder="Name"
+                        onChange={this.onChange}
+                      />
+                    </div>
                   </div>
-                </div>
+                  <div className="form-group row">
+                    <label
+                      htmlFor="input2EmailForm"
+                      className="sr-only control-label"
+                    >
+                      email
+                    </label>
+                    <div className="offset-sm-2 col-sm-8">
+                      <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        placeholder="Email"
+                        value={this.state.formData.email.value}
+                        onChange={this.onChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label className="sr-only control-label" />
+                    <div className="offset-sm-2 col-sm-8">
+                      <input
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        placeholder="Password"
+                        value={this.state.formData.password.value}
+                        onChange={this.onChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label className="sr-only control-label" />
+                    <div className="offset-sm-2 col-sm-8">
+                      <input
+                        type="password"
+                        className="form-control"
+                        name="passwordConfirm"
+                        placeholder="Confirm Password"
+                        value={this.state.formData.passwordConfirm.value}
+                        onChange={this.confirmPasswordsMatch}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <div className="offset-sm-2 col-sm-8 pb-3 pt-2">
+                      <button
+                        type="button"
+                        className="btn btn-secondary btn-md btn-block"
+                        onClick={this.registerUser}
+                      >
+                        Register
+                      </button>
+                      <div style={{ paddingTop: "20px" }}>
+                        <small>
+                          <a
+                            href=""
+                            onClick={this.showLogin}
+                            className=""
+                            data-toggle="collapse"
+                            data-target="#cardRegister"
+                            data-parent="#parent"
+                          >
+                            <p className="text-center">Back to Login</p>
+                          </a>
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </React.Fragment>
     );
   }
 }

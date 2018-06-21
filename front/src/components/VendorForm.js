@@ -46,7 +46,7 @@ class VendorForm extends React.Component {
       },
       storeAddress: {
         originalValue: initializedVendor.storeAddress,
-        value: initializedVendor.storeAdress,
+        value: initializedVendor.storeAddress,
         valid: true,
         validation: {
           required: true
@@ -184,7 +184,7 @@ class VendorForm extends React.Component {
                       <button
                         type="button"
                         className="btn btn-secondary btn-md btn-block"
-                        onClick={this.registerUser}
+                        onClick={this.contactVendor}
                       >
                         Register
                       </button>
@@ -209,7 +209,6 @@ class VendorForm extends React.Component {
             </div>
           </div>
         )}
-        hello
       </React.Fragment>
     );
   }

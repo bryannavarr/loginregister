@@ -81,11 +81,11 @@ function register(req, res) {
             host: "smtp.ethereal.email",
             port: 587,
             auth: {
-              user: process.env.ETHEREAL_EMAIL,
-              pass: process.env.ETHEREAL_PASSWORD
+              user: "zwfvrvo7653f5gzi@ethereal.email",
+              pass: "TdYPyN8fdhD1DJvmAy"
             }
           });
-          let mailOptions = {
+          let message = {
             from: "info@edwrd.io",
             to: req.model.email,
             subject: "Please verify your email",
