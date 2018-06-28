@@ -20,7 +20,7 @@ class Home extends Component {
           <source src={video} type="video/mp4" />
         </video>
         <div className="content">
-          <h1>
+          <div>
             <span>Tension-Free</span>{" "}
             <a
               className="typewrite"
@@ -30,11 +30,11 @@ class Home extends Component {
               <span className="wrap" />
             </a>{" "}
             <span>Celebration</span>
-          </h1>
-          <span>
+          </div>
+          <p>
             Simply great design for you and your team <br />Get your team on
             brand. <br /> Unleash your creativity.
-          </span>
+          </p>
         </div>
         <div className="container" id="panel">
           <div className="row justify-content-end">
